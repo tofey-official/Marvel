@@ -1,0 +1,19 @@
+1 - Subir o arquivo "Painel Ibo 09 Temas Rev Chat.zip" em sua hospedagem. 
+
+Basta fazer o upload do arquivo zip para sua hospedagem e descompactá-lo.
+Obs: deixar a VERSÃO PHP em 7.1 ea, ou 7.2 ea, ou 7.4 ea
+
+2 - Abra o Painel Admin
+Ex: "https://seudominio.com/suapasta/login.php"
+
+USUARIO: admin
+SENHA: admin
+
+3 - Editar o APK IBO PRO com o APK Editor, se caso não tiver o apkeditor, te envio de cortesia em seu celular.
+
+procure por "https://ibochatreventemas.apktop.com.br/" 
+e substitua pelo Endereço do seu Painel.
+
+Ex: "https://seudominio.com/suapasta/".
+(NÃO MODIFICAR OS DEMAIS CARACTERES)
+

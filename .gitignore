@@ -1,0 +1,11 @@
+*.apk
+error_log
+api/git_sync.log
+*.db-journal
+*.db-wal
+*.db-shm
+.antigravitycli/
+*~
+.DS_Store
+includes/github_config.php
+
