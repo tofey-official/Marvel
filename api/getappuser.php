@@ -37,7 +37,7 @@ function formatMac($mac) {
 function trial($mac) {
     global $db2, $res;
     
-    $res = $db2->query('SELECT * FROM ibo WHERE mac_address="'.$mac .'"');
+    $res = $db2->query('SELECT * FROM ibo WHERE mac_address=\''.$mac .'\'');
     $count = 0;
     while ($row = $res->fetchArray()) {
         $count++;
@@ -106,7 +106,7 @@ function defaultHandle($mac) {
     global $db2, $res;
     if(!isset($mac)) return;
     
-    $res = $db2->query('SELECT * FROM ibo WHERE mac_address="'.$mac .'"');
+    $res = $db2->query('SELECT * FROM ibo WHERE mac_address=\''.$mac .'\'');
     $count = 0;
     while ($row = $res->fetchArray()) {
         $count++;
@@ -168,7 +168,7 @@ if (isset($mac)) {
         $db2->exec('INSERT INTO catch(device, date) VALUES(\''.$mac .'\', \''.$date .'\')');
     } else {
         $db3 = new SQLite3('./.ansdb.db');
-        $res3 = $db3->query('SELECT * FROM ibo WHERE mac_address="'.$mac .'"');
+        $res3 = $db3->query('SELECT * FROM ibo WHERE mac_address=\''.$mac .'\'');
         while ($row3 = $res3->fetchArray()) {
             $url = $row3['url'];
             $username = $row3['username'];

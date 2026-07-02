@@ -123,6 +123,10 @@ $col3 = $col2;
             <i class="fa-solid fa-user-check"></i>
             <span>Meus Clientes</span></a>
             
+            <a class="nav-link" href="codes.php">
+            <i class="fa-solid fa-key"></i>
+            <span>أكواد التفعيل (Codes)</span></a>
+            
             <a class="nav-link" href="replace.php">
             <i class="fa-solid fa-cloud"></i>
             <span>Atualizar Dominio</span></a>
@@ -192,6 +196,10 @@ $col3 = $col2;
         <a class="nav-link" href="users.php">
             <i class="fas fa-home" style="color: #FFFFFF;"></i>
             <span>Inicio</span></a>
+            
+        <a class="nav-link" href="codes.php">
+            <i class="fa-solid fa-key"></i>
+            <span>أكواد التفعيل (Codes)</span></a>
     
         <a class="nav-link" href="replace.php">
                 <i class="fa-solid fa-cloud"></i>

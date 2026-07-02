@@ -8,4 +8,11 @@ api/git_sync.log
 *~
 .DS_Store
 includes/github_config.php
+decompiled/
+decompiled_baghdad/
+decompiled_no_res/
+*.idsig
+*.jpg
+*.png
+
 

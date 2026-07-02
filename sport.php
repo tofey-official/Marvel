@@ -8,7 +8,7 @@ $row1 = $rows->fetchArray();
 $numRows = $row1['count'];
 
 if ($numRows == 0) {
-	$db->exec('INSERT INTO sport(id, title, url, c1, c2, c3) VALUES(\'1\', \'Default\', \'https://jogoshoje.com')');
+	$db->exec("INSERT INTO sport(id, title, url, c1, c2, c3) VALUES('1', 'Default', 'https://jogoshoje.com')");
 }
 
 $res = $db->query('SELECT * FROM sport WHERE id=\'1\'');

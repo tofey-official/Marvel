@@ -102,7 +102,7 @@ file_put_contents('1_authenticate.txt', $req.PHP_EOL, FILE_APPEND);
 
 		while ($row = $res->fetchArray()) {
 			$expire_date1 = NULL;
-			$res1 = $db->query('SELECT * FROM ibo WHERE mac_address="' . $macaddress . '"');
+			$res1 = $db->query('SELECT * FROM ibo WHERE mac_address=\'' . $macaddress . '\'');
 
 			while ($row1 = $res1->fetchArray()) {
 				$expire_date1 = $row1['expire_date'];

@@ -7,7 +7,6 @@ if (file_exists(__DIR__ . '/includes/github_sync.php')) {
     include_once __DIR__ . '/includes/github_sync.php';
 }
 
-
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
@@ -34,7 +33,7 @@ if (isset($_GET["delete"])) {
     $stmtDelete->bindValue(':id', $_GET["delete"], SQLITE3_INTEGER);
     $stmtDelete->execute();
     $db->close();
-    header("Location: users.php");
+    header("Location: codes.php");
     exit();
 }
 
@@ -55,21 +54,21 @@ $count = $resCount->fetchArray()['count'];
 $available = $macCount - $count;
 
 if (!$_SESSION["admin"]) {
-    echo "<div class='alert alert-warning'><b>Você pode registrar mais $available MACs (Limite de $macCount)</b></div>";
+    echo "<div class='alert alert-warning'><b>Você pode registrar mais $available Códigos (Limite de $macCount)</b></div>";
 }
 
 echo "<div class=\"modal fade\" id=\"confirm-delete\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
     <div class=\"modal-dialog\">
         <div class=\"modal-content\">
             <div class=\"modal-header\">
-                <h2>Confirm</h2>
+                <h2>تأكيد الحذف (Confirm)</h2>
             </div>
             <div class=\"modal-body\">
-                Do you really want to delete?
+                هل تريد حقًا حذف كود التفعيل هذا؟
             </div>
             <div class=\"modal-footer\">
-                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button>
-                <a class=\"btn btn-danger btn-ok\">Delete</a>
+                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">إلغاء</button>
+                <a class=\"btn btn-danger btn-ok\">حذف</a>
             </div>
         </div>
     </div>
@@ -77,14 +76,14 @@ echo "<div class=\"modal fade\" id=\"confirm-delete\" tabindex=\"-1\" role=\"dia
 <main role=\"main\" class=\"col-15 pt-4 px-5\">
     <div class=\"row justify-text-center\">
         <div id=\"main\">
-            <br><h2>Meus Usuários</h2>
+            <br><h2>أكواد التفعيل المجانية (Free Activation Codes)</h2>
             <div class=\"input-group\">
-                <a button class=\"btn btn-success btn-icon-split\" id=\"button\" href=\"./users_create.php\">
-                    <span class=\"icon text-white-50\"><i class=\"fas fa-check\"></i></span>
-                    <span class=\"text\">Novo</span>
+                <a button class=\"btn btn-success btn-icon-split\" id=\"button\" href=\"./codes_create.php\">
+                    <span class=\"icon text-white-50\"><i class=\"fas fa-plus\"></i></span>
+                    <span class=\"text\">إنشاء كود جديد (Novo Código)</span>
                 </button></a>
                 &nbsp;&nbsp;
-                <input class=\"form-control\" type=\"text\" id=\"search\" placeholder=\"Pesquise por MAC, Nome ou Usuário...\" name=\"search_value\"/>
+                <input class=\"form-control\" type=\"text\" id=\"search\" placeholder=\"بحث عن كود، اسم أو مستخدم...\" name=\"search_value\"/>
             </div>
         </div>
         <div class=\"table-responsive\">
@@ -92,18 +91,19 @@ echo "<div class=\"modal fade\" id=\"confirm-delete\" tabindex=\"-1\" role=\"dia
                 <thead class=\"text-primary\">
                     <tr>
                         <th>ID</th>
-                        <th>MAC</th>
-                        <th>Usuário</th>
-                        <th>Nome</th>
-                        <th>DNS</th> <!-- Nova coluna para DNS -->
-                        <th>Editar</th>
-                        <th>Excluir</th>
+                        <th>كود التفعيل (Code)</th>
+                        <th>المستخدم (User)</th>
+                        <th>الاسم (Nome)</th>
+                        <th>رابط التشغيل (DNS)</th>
+                        <th>تعديل (Editar)</th>
+                        <th>حذف (Excluir)</th>
                     </tr>
                 </thead>
                 <tbody class=\"text-primary\">
 ";
 
-$stmt = $db->prepare("SELECT * FROM ibo WHERE id_user = :id_user AND mac_address LIKE '%:%'");
+// We select only codes (where mac_address does not contain colons)
+$stmt = $db->prepare("SELECT * FROM ibo WHERE id_user = :id_user AND mac_address NOT LIKE '%:%'");
 $stmt->bindValue(':id_user', $_SESSION['id'], SQLITE3_INTEGER);
 $res = $stmt->execute();
 
@@ -122,12 +122,12 @@ while ($row = $res->fetchArray()) {
 
     echo "                  <tr>\n";
     echo "                      <td>" . $iid . "</td>\n";
-    echo "                      <td>" . $imac . "</td>\n";
+    echo "                      <td><b style='color: #4e73df;'>" . $imac . "</b></td>\n";
     echo "                      <td>" . $iusername . "</td>\n";
     echo "                      <td>" . $ititle . "</td>\n";
     echo "                      <td>" . $idns . "</td>\n";
-    echo "                      <td><a class=\"btn btn-icon\" href=\"./users_update.php?update=" . $iid . "\"><span class=\"icon text-white-50\"><img src=\"./icons/edit.png\" style=\"width:24px;height:24px;\" alt=\"Edit\"></span></a></td>\n";
-    echo "                      <td><a class=\"btn btn-icon\" href=\"#\" data-href=\"./users.php?delete=" . $iid . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\"><span class=\"icon text-white-50\"><img src=\"./icons/delete.png\" style=\"width:24px;height:24px;\" alt=\"Delete\"></span></a></td>\n";
+    echo "                      <td><a class=\"btn btn-icon\" href=\"./codes_update.php?update=" . $iid . "\"><span class=\"icon text-white-50\"><img src=\"./icons/edit.png\" style=\"width:24px;height:24px;\" alt=\"Edit\"></span></a></td>\n";
+    echo "                      <td><a class=\"btn btn-icon\" href=\"#\" data-href=\"./codes.php?delete=" . $iid . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\"><span class=\"icon text-white-50\"><img src=\"./icons/delete.png\" style=\"width:24px;height:24px;\" alt=\"Delete\"></span></a></td>\n";
     echo "                  </tr>\n";
 }
 

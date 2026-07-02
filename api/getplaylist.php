@@ -43,7 +43,7 @@ $date0 = strtotime($date);
 $date1 = strtotime("+7 day", $date0);
 $date2 = date("Y-m-d", $date1);
 if (isset($_GET["m"])) {
-    $res = $db->query("SELECT * FROM ibo WHERE mac_address=\"" . $address1 . "\"");
+    $res = $db->query("SELECT * FROM ibo WHERE mac_address='" . $address1 . "'");
     $actual_date = strtotime(date("Y-m-d"));
     while ($row = $res->fetchArray()) {
         $check_mac = $row["mac_address"];
@@ -61,7 +61,7 @@ if (isset($_GET["m"])) {
         if ("0" <= $check_date) {
             $data2 = [];
             $db2 = new SQLite3("./.ansdb.db");
-            $res2 = $db2->query("SELECT * FROM ibo WHERE mac_address=\"" . $address1 . "\"");
+            $res2 = $db2->query("SELECT * FROM ibo WHERE mac_address='" . $address1 . "'");
             while ($row2 = $res2->fetchArray()) {
                 if ($row["type"] == "0") {
                     $playlist_type = "general";
